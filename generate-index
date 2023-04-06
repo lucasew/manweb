@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+nix run github:mic92/nix-index-database -- -r '/man/man[0-9]/.*.gz' | tee man.txt
