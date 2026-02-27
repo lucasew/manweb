@@ -1,0 +1,53 @@
+[tools]
+rust = "1.84.0"
+python = "3.12.3"
+uv = "0.10.6"
+# 'workspaced' is assumed to be available or provided by another method.
+
+[tasks.install]
+description = "Install dependencies"
+depends = ["install:*"]
+
+[tasks."install:rust"]
+run = "cd wasm-client && cargo fetch"
+
+[tasks.lint]
+description = "Lint the codebase"
+run = """
+if command -v workspaced >/dev/null 2>&1; then
+  workspaced codebase lint
+else
+  echo "workspaced not found, skipping lint"
+fi
+"""
+
+[tasks.fmt]
+description = "Format the codebase"
+run = """
+if command -v workspaced >/dev/null 2>&1; then
+  workspaced codebase format
+else
+  echo "workspaced not found, skipping format"
+fi
+"""
+
+[tasks.test]
+description = "Run tests"
+depends = ["test:*"]
+
+[tasks."test:rust"]
+run = "cd wasm-client && cargo test"
+
+[tasks.codegen]
+description = "Update generated code"
+depends = ["codegen:*"]
+
+[tasks."codegen:all"]
+run = [
+    "./generate-index > /dev/null 2>&1",
+    "uv run --with tqdm python fetch.py"
+]
+
+[tasks.ci]
+description = "Run CI pipeline"
+depends = ["lint", "test"]
