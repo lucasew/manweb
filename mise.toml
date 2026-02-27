@@ -4,15 +4,9 @@ python = "3.14.3"
 uv = "0.10.6"
 # 'workspaced' is assumed to be available or provided by another method.
 
-[env]
-_.python.venv = { path = ".venv", create = true }
-
 [tasks.install]
 description = "Install dependencies"
 depends = ["install:*"]
-
-[tasks."install:python"]
-run = "uv pip install tqdm"
 
 [tasks."install:rust"]
 run = "cd wasm-client && cargo fetch"
@@ -53,7 +47,7 @@ run = "./generate-index"
 
 [tasks."codegen:fetch"]
 depends = ["codegen:generate-index"]
-run = "python fetch.py"
+run = "uv run --with tqdm python fetch.py"
 
 [tasks.ci]
 description = "Run CI pipeline"
