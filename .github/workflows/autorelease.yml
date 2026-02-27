@@ -36,7 +36,6 @@ jobs:
           title: "chore: update generated code"
           body: "Automated changes from codegen."
           branch: "codegen-update"
-          base: ${{ github.head_ref }}
 
       - name: CI
         run: mise run ci
