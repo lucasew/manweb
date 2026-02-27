@@ -43,7 +43,7 @@ description = "Update generated code"
 depends = ["codegen:*"]
 
 [tasks."codegen:generate-index"]
-run = "./generate-index"
+run = "./generate-index > /dev/null 2>&1"
 
 [tasks."codegen:fetch"]
 depends = ["codegen:generate-index"]
