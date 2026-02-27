@@ -15,6 +15,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref || github.ref_name }}
 
       - uses: cachix/install-nix-action@v27
         with:
@@ -37,7 +39,6 @@ jobs:
           title: "chore: update generated code"
           body: "Automated changes from codegen."
           branch: "codegen-update"
-          base: main
 
       - name: CI
         run: mise run ci
