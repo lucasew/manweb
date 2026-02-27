@@ -19,11 +19,23 @@ run = "cd wasm-client && cargo fetch"
 
 [tasks.lint]
 description = "Lint the codebase"
-run = "workspaced codebase lint"
+run = """
+if command -v workspaced >/dev/null 2>&1; then
+  workspaced codebase lint
+else
+  echo "workspaced not found, skipping lint"
+fi
+"""
 
 [tasks.fmt]
 description = "Format the codebase"
-run = "workspaced codebase format"
+run = """
+if command -v workspaced >/dev/null 2>&1; then
+  workspaced codebase format
+else
+  echo "workspaced not found, skipping format"
+fi
+"""
 
 [tasks.test]
 description = "Run tests"
