@@ -1,0 +1,1 @@
+- 2024-03-21: [Critical RCE] Watch for subprocess.run with shell=True using string interpolation for untrusted input; prefer list arguments and shell=False.

@@ -98,7 +98,8 @@ for drv_hash, v in items_by_hash.items():
             man_file_name = folder_with_hash / man_name
             tempfile_extracted = str(tempfile_download).replace('.xz', '')
             ops.set_description(f"Extracting '{item.path}' from '{tempfile_extracted}'")
-            run(f"nix nar cat '{str(tempfile_extracted)}' '/{item.path}' > '{str(man_file_name.resolve())}'", shell=True, stderr=stderr, stdout=stdout, check=True)
+            with open(man_file_name.resolve(), 'wb') as out_f:
+                run(['nix', 'nar', 'cat', str(tempfile_extracted), f'/{item.path}'], stderr=stderr, stdout=out_f, check=True)
             ops.update(1)
         rmtree(str(tempdir))
     ops.update(len(v))
