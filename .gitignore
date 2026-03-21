@@ -4,3 +4,4 @@ data
 .devenv*
 devenv.local.nix
 
+__pycache__
