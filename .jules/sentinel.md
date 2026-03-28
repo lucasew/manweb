@@ -1,0 +1,1 @@
+- 2026-03-28: [Resource Leak/DoS] Unhandled exceptions during temp file processing leave artifacts behind; always use tempfile.TemporaryDirectory() or context managers to ensure safe cleanup.
