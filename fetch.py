@@ -6,9 +6,9 @@ from argparse import ArgumentParser
 from collections import defaultdict
 from urllib.request import urlopen
 from tempfile import mkdtemp
-from subprocess import run, PIPE
+from subprocess import run
 from sys import stderr, stdout
-from shutil import rmtree, copy
+from shutil import rmtree
 from tqdm import tqdm
 
 parser = ArgumentParser()
